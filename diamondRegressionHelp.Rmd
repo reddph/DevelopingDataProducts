@@ -1,0 +1,63 @@
+---
+title: "Help File for Diamond Price Prediction Project"
+author: "Phanindra Reddigari"
+date: "August 16, 2015"
+output: html_document
+---
+
+###Overview:
+
+This is an R Markdown generated html help file for the Shiny application project submitted for the Coursera Developing Data Products course. The shiny application showcases the well noted diamond dataset for predicting diamond prices using random forest for regression. In summary, the UI reflects the following phases of a regression analysis project. Based on known efficiencies, Random Forest (RF) method was chosen for training the regression model. The model from the training was saved as rda file to disk during the training phase. This model file is included in the shiny application project folder along with ui.R and server.R for reloading subsequently during the web application execution on the Shiny server hosted by RPubs. This approach dramatically reduces the run time execution of the Shiny application for the user.
+
+1. Preliminary analysis of data for exploring basic relationships between price (outcome) and the covariates. This includes relationship plots and data summary.  
+2. Partitioning of the diamond dataset into training and test sets.
+3. Use training dataset for computing the RF regression model for regressing price against all other variables in the dataset. Save the model to a rda file  
+4. Load the model rda file to compute prediction of diamond price against the test dataset  
+5. Tabulate and plot the results for examining metrics:
+    +  Residual Mean Squared Error (RMSE) 
+    +  RSquared
+    +  Actual vs predicted diamond price for test dataset
+    +  Plots for ranking variables in descending order of importance
+    +  RMSE vs number of trees for finding the ntree used by RF during training
+
+###UI Description:
+
+The web page uses the sidebar panel for a pull-down menu item for selecting covariates in the dataset (carat, cut, color, clarity, depth, table, x, y, and z) for plotting the price variation vs the selected covariate.
+
+The main panel features tabset panel which contains 7 tab panel one for each of the following items for visualization:
+
+1. Documentation: This tab displays the documentation of the Shiny application for articulating the UI to the user   
+
+2. Exploration: Plots for price vs selected covariate from the pull down. The plots are box plots if the covariate is a factored variable, and the plots are scatter plots otherwise  
+
+3. Price PDF: Probability density functions (PDF) for diamond prices identified separately for each diamond cut (levels of the factored variable)  
+
+4. Data Summary: Interactive data table for the basic summary of the diamond data set. The interactive table feature allows sorting the tabulated data by selected column in ascending or descending order  
+
+5. Regression: Interactive data table for tabulating the summary results for the finalModel (random forest object) of the fitted RF model. The important columns of this table are RMSE and RSquared as a function of mtry (number of variable splits at each node)  
+
+6. Prediction: Use the RF model for predicting the diamond prices of the test dataset (the test dataset has null intersection with the training dataset). This plot is a visual representation of the accuracy of the model fit as applied to the test set.  
+
+7. Importance: This plot is a visual representation of ranking of the variables in decreasing importance to the model. The variables that are less important have lower significance for regression.  
+
+8. NumberOfTrees: This plot is a visual representation of the speed of the RF training to converge to the minimum RMSE as a function of the number of trees in the random forest model. 
+
+The user can verify that the renderPlot and dataTableOutput function calls for all tabs are reactive. In other words, once the user selects a tab or an item in the pull down menu, the plots and tables are refreshed automatically without the need for the user to refresh the web page. 
+
+###Caveats:
+
+1. The pull down menu in the sidebar panel for selecting the variables for plotting provides context only for the Exploration (first) tab in the main panel. So if the user is on a tab different from Exploration tab in the main panel but the user selects a different item in the pull down menu in the sidebar panel, the user would not see any change to the current tab display. However, the reactivity of the selected item from the pull down will manifest itself when the user switches to the Exploration tab. At that point, the plot would immediately react to the variable selected prior to switch. 
+
+2. The user should expect slight delays in the rendering of the display for tabs involved in high computation (RF Regression, Prediction vs Actual, Importance, and MSE vs NumberOfTrees) of RF models. Depending on the traffic on the Shiny server, the user is urged to exercise patience while waiting for table or plot displays to refresh on tab (context) switches.
+
+###Conclusions:
+
+1. The RF Regression model is able to predict the diamond prices with fair amount of accuracy as evidenced by the RSquared value of 0.948 at the optimum values of 12 and 887.4 for mtry and RMSE, respectively.  
+
+2. The variables of carat, y, x, z, and few factored levels of clarity and color are the most important variables, and others parameters are not significant to the regression model.
+
+3. The RF search converges to the optimal RMSE for ntree value slightly less than 100.
+
+4. The RF regression extended to a larger test dataset (visual representation is on Prediction vs Actual tab) appears to be promising for diamond price prediction.
+
+
