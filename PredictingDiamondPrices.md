@@ -7,8 +7,8 @@ Objectives:
 ========================================================
 Analyze the well known diamond dataset and develop a Shiny application for robust regression model for predicting diamond prices on test dataset. The UI is tab structured to provide user interaction to navigate the different analysis phases back and forth with relative ease:
 
-- Tab1: Basic data exploration using ggplots of price vs other variables
-- Tab2: User Documentation
+- Tab1: User Documentation
+- Tab2: Basic data exploration using ggplots of price vs other variables
 - Tab3 and Tab4: Price density plots and data summary table
 - Tab5: Summary of RF Regression (price ~ .) on training partition
 - Tab6: Predict prices on test partition

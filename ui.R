@@ -21,14 +21,14 @@ shinyUI(pageWithSidebar(
     # Use of tabsets for user to switch context for stages of exploration and RF regression
     mainPanel(
         tabsetPanel(
-            tabPanel("Exploration",plotOutput("diamondPricePlot")),
-            tabPanel("Documentation",includeHTML("./diamondRegressionHelp.html")),
+            tabPanel("Help",includeHTML("./diamondRegressionHelp.html")),
+            tabPanel("Explore",plotOutput("diamondPricePlot")),
             tabPanel("Price PDF",plotOutput("priceDensityPlot")),
             tabPanel("Data Summary", dataTableOutput("summary")),
-            tabPanel("RF Regression", dataTableOutput("rfPredictionAccuracy")),
-            tabPanel("Prediction", plotOutput("testPredictionMSE")),
+            tabPanel("RF Model", dataTableOutput("rfPredictionAccuracy")),
+            tabPanel("Predict", plotOutput("testPredictionMSE")),
             tabPanel("Importance",plotOutput("variableImportancePlot")),
-            tabPanel("NumberOfTrees", plotOutput("MSE_vs_NumTrees")),
+            tabPanel("Convergence", plotOutput("MSE_vs_NumTrees")),
             class = "span8"
         )
     )

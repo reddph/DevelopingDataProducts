@@ -112,7 +112,7 @@ shinyServer(function(input, output) {
             
             p <- ggplot(predComparison,aes(x=id, y=price, color = Type)) + geom_point() +
                         scale_color_discrete(name="") + theme(legend.position="right") + 
-                        ggtitle("Diamond Price Prediction") +
+                        ggtitle("Diamond Price Prediction from Test Samples") +
                         theme(plot.title = element_text(lineheight=.8, face="bold"))
             
             print(p)
